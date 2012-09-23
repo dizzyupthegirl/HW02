@@ -77,7 +77,7 @@ int getIndex(int x, int y) {
 	}
 
 
-void drawCircle(int x, int y, int r, uint8_t* pixelData){
+void drawCircle(int x, int y, int r, uint8_t* pixelData, int red, int green, int blue){
     int tempX, tempY;
     double angle = 0;
     
@@ -87,7 +87,7 @@ void drawCircle(int x, int y, int r, uint8_t* pixelData){
         tempX = x+r*sin(angle+3.14/2);
         tempY = y+r*sin(angle);
         i = getIndex(tempX, tempY);    
-        changeColor(0,0,255,i, pixelData);
+        changeColor(red,green,blue,i, pixelData);
         angle+=.01;
     }
 }
@@ -96,7 +96,7 @@ void display(Lists* circList, uint8_t* data){
     circList->reverse();
     Circle* current = circList->circ_sentinel->next;
     while(current!= circList->circ_sentinel){
-        drawCircle(current->pos_X, current->pos_Y, current->radius, data);
+        drawCircle(current->pos_X, current->pos_Y, current->radius, data, rand()%256, rand()%256, rand()%256);
         current = current->next;
     }    
     circList->reverse();
