@@ -16,7 +16,7 @@ Circle* Lists::insertAfter(Circle* previousCirc, int pos_X, int pos_Y){
 }
 
 
-Squares* Lists::insertAfter(Squares* previousSqr, int s){
+/*Squares* Lists::insertAfter(Squares* previousSqr, int s){
     Squares* temp = new Squares;
     temp->next = previousSqr->next;
     temp->previous = previousSqr;
@@ -26,4 +26,17 @@ Squares* Lists::insertAfter(Squares* previousSqr, int s){
     temp->color = cinder::Color8u(rand()%256, rand()%256, rand()%256);
     
     return temp;
+}
+*/
+
+void Lists::reverse(){
+    Circle* cur = circ_sentinel;
+    Circle* temp;
+    
+    do {
+        temp = cur->previous;
+        cur->previous = cur->next;
+        cur->next = temp;
+        cur = cur->previous;
+    }while(cur != circ_sentinel);
 }

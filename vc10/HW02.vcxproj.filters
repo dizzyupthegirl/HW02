@@ -18,13 +18,13 @@
     <ClCompile Include="..\src\HW02App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Circle.cpp">
+    <ClCompile Include="..\src\Circle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Squares.cpp">
+    <ClCompile Include="..\src\Squares.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lists.cpp">
+    <ClCompile Include="..\src\Lists.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,14 +32,14 @@
     <ClInclude Include="..\include\Resources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Circle.h">
+    <ClInclude Include="..\include\Circle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Squares.h">
+    <ClInclude Include="..\include\Lists.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lists.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="..\include\Squares.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

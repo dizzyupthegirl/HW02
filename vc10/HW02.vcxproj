@@ -104,16 +104,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Circle.cpp" />
     <ClCompile Include="..\src\HW02App.cpp" />
-    <ClCompile Include="Circle.cpp" />
-    <ClCompile Include="Lists.cpp" />
-    <ClCompile Include="Squares.cpp" />
+    <ClCompile Include="..\src\Lists.cpp" />
+    <ClCompile Include="..\src\Squares.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Circle.h" />
+    <ClInclude Include="..\include\Lists.h" />
     <ClInclude Include="..\include\Resources.h" />
-    <ClInclude Include="Circle.h" />
-    <ClInclude Include="Lists.h" />
-    <ClInclude Include="Squares.h" />
+    <ClInclude Include="..\include\Squares.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources.rc" />
