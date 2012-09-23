@@ -74,8 +74,9 @@ void drawCircle(int x, int y, int r, uint8_t* pixelData){
 
 void HW02App::update()
 {
-	uint8_t* pixelData = (*my_Surface).getData();
-	drawCircle(500, 500, 40,  pixelData);
+	//uint8_t* pixelData = (*my_Surface).getData();
+	//drawCircle(500, 500, 40,  pixelData);
+
 
 }
 
