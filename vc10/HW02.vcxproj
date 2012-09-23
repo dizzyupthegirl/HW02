@@ -105,11 +105,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\HW02App.cpp" />
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Lists.cpp" />
+    <ClCompile Include="Squares.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="Circle.h" />
-    <ClInclude Include="Lists" />
+    <ClInclude Include="Lists.h" />
     <ClInclude Include="Squares.h" />
   </ItemGroup>
   <ItemGroup>
