@@ -2,6 +2,13 @@
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
 #include "cinder/gl/Texture.h"
+#include "cinder/app/AppNative.h"
+#include "cinder/Text.h"
+#include "cinder/Utilities.h"
+#include "cinder/ImageIo.h"
+#include "cinder/Font.h"
+#include "Resources.h"
+
 
 
 
@@ -12,13 +19,14 @@ using namespace std;
 class HW02App : public AppBasic {
   public:
     Lists* circList;
-
+	gl::Texture	mTexture, mSimpleTexture;
 
 	void setup();
 	void mouseDown( MouseEvent event );	
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
+
 
 	
 	private:
@@ -28,6 +36,8 @@ class HW02App : public AppBasic {
 	static const int kAppWidth = 800;
 	static const int kAppHeight = 600;
 	static const int textureSize = 1024;
+	static const bool PREMULT = false;
+	int clicks, iterations;
 
 	void HW02App::prepareSettings(Settings* settings){
 	(*settings).setWindowSize(kAppWidth,kAppHeight);
@@ -50,14 +60,18 @@ void HW02App::setup()
 	next = circList->insertAfter(circList->circ_sentinel, kAppWidth/8, kAppHeight/4);
 	for(int i=0; i<6; i++) {
 	 next= circList->insertAfter(next, i*kAppWidth/2, kAppHeight/2);
+	}
+	
 
-}
 
 }
 
 
 void HW02App::mouseDown( MouseEvent event )
 {
+	clicks++;
+
+
 
 }
 
@@ -104,15 +118,27 @@ void display(Lists* circList, uint8_t* data){
 
 void HW02App::update()
 {
+	
 	uint8_t* pixelData = (*my_Surface).getData();
 	display(circList, pixelData);
-
-
+	if(clicks==0) {
+	Font customFont( Font( "Parseltongue", 42 ) );
+	TextLayout simple;
+	simple.setFont( customFont );
+	simple.setColor( Color( 1, 0, 0.1f ) );
+	simple.addLine( "Welcome to 52 card pick up" );
+	simple.addLine( "Click to play" );
+	mSimpleTexture = gl::Texture( simple.render( true, PREMULT ) );
+	}
+	
+		
+	
+	}
 }
-
 void HW02App::draw()
 {
 	gl::draw(*my_Surface);
+	gl::draw( mSimpleTexture, Vec2f( 10, getWindowHeight() - mSimpleTexture.getHeight() - 5 ) );
 
 }
 
