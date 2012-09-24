@@ -18,9 +18,8 @@ class HW02App : public AppBasic {
   public:
     Lists* circList;
 	void setup();
-	void keyPress( KeyEvent event );
+	void keyDown( KeyEvent event );
 	void mouseDown( MouseEvent event );	
-	void mouseDrag(MouseEvent event);
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
@@ -51,7 +50,7 @@ class HW02App : public AppBasic {
     circList->circ_sentinel = new Circle;
     circList->circ_sentinel->next = circList->circ_sentinel;
     circList->circ_sentinel->previous = circList->circ_sentinel;
-	circList->circ_sentinel->radius = 40;
+	circList->circ_sentinel->radius = 30;
 	circList->circ_sentinel->pos_X=200;
 	circList->circ_sentinel->pos_Y=0;
     Circle* next;
@@ -67,19 +66,19 @@ class HW02App : public AppBasic {
 
 	cnt=0;
 }
-void HW02App::keyPress(cinder::app::KeyEvent event )
-{
-
+void HW02App::keyDown(cinder::app::KeyEvent event )
+	{
+	if(event.isShiftDown())
 	circList->reverse();
 
-		
-}
+	}
 
 void HW02App::mouseDown( MouseEvent event )
 {
 	if(event.isRightDown())
 	circList->reverse();
-	/*while(current!= circList->circ_sentinel) {
+	Circle* current = circList->circ_sentinel->next;
+	while(current!= circList->circ_sentinel) {
 	if(circList->isInside(event.getX(), event.getY(),current)) {
 		circList->moveToFront(current);
 		current=circList->circ_sentinel;
@@ -88,39 +87,16 @@ void HW02App::mouseDown( MouseEvent event )
 		current = current->next;
 	}
 	}
-	*/
+	
 	
 
 }
-
-
-
-
-void HW02App::mouseDrag( MouseEvent event )
-{
-	// add wherever the user drags to the end of our list of points
-	mPoints.push_back( event.getPos() );
-}
-
-
-
 
 
 void HW02App::update()
 	
 {
-	if(cnt<20) {
-		circList->circ_sentinel->radius=circList->circ_sentinel->radius-2;
-		cnt++;
-	}
-	else {
-		if(cnt==40)
-			cnt=0;
-		else
-			circList->circ_sentinel->radius=circList->circ_sentinel->radius+2;
-		
 	
-	}
 	
 }
 void HW02App::draw()
@@ -136,16 +112,6 @@ void HW02App::draw()
 		current = current->next;
     }    
 	
-	glColor3f( 1.0f, 1.0f, 1.0f );
-	
-	
-	glBegin( GL_LINE_STRIP );
-	for( list<Vec2f>::iterator pointIter = mPoints.begin(); pointIter != mPoints.end(); ++pointIter ) {
-		glVertex2f( *pointIter );
-	}
-	glEnd();
-	
-
 }
 
 

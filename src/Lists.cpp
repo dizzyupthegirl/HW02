@@ -24,9 +24,9 @@ void Lists::moveToFront(Circle* movee){
 }
 
 bool Lists::isInside(int x, int y, Circle* check) {
-	int deltaX = x-check->pos_X;
-    int deltaY = y-check->pos_Y;
-    int distance = sqrt((double)deltaX*deltaX+deltaY*deltaY);
+	int X = x-check->pos_X;
+    int Y = y-check->pos_Y;
+    int distance = sqrt((double)X*X+Y*Y);
     return(distance <= check->radius);
 }
 
