@@ -23,6 +23,7 @@ class HW02App : public AppBasic {
 
 	void setup();
 	void mouseDown( MouseEvent event );	
+	void mouseDrag(MouseEvent event);
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
@@ -38,6 +39,7 @@ class HW02App : public AppBasic {
 	static const int textureSize = 1024;
 	static const bool PREMULT = false;
 	int clicks, iterations;
+	list<Vec2f>		mPoints;
 
 	void HW02App::prepareSettings(Settings* settings){
 	(*settings).setWindowSize(kAppWidth,kAppHeight);
@@ -74,7 +76,11 @@ void HW02App::mouseDown( MouseEvent event )
 
 
 }
-
+void HW02App::mouseDrag( MouseEvent event )
+{
+	// add wherever the user drags to the end of our list of points
+	mPoints.push_back( event.getPos() );
+}
 
 
 
@@ -122,23 +128,36 @@ void HW02App::update()
 	uint8_t* pixelData = (*my_Surface).getData();
 	display(circList, pixelData);
 	if(clicks==0) {
-	Font customFont( Font( "Parseltongue", 42 ) );
+	Font customFont( Font( "Arial", 42 ) );
 	TextLayout simple;
 	simple.setFont( customFont );
 	simple.setColor( Color( 1, 0, 0.1f ) );
-	simple.addLine( "Welcome to 52 card pick up" );
-	simple.addLine( "Click to play" );
+	simple.addLine( "Connect the dots" );
 	mSimpleTexture = gl::Texture( simple.render( true, PREMULT ) );
 	}
+
 	
 		
 	
 	}
-}
+
 void HW02App::draw()
 {
 	gl::draw(*my_Surface);
 	gl::draw( mSimpleTexture, Vec2f( 10, getWindowHeight() - mSimpleTexture.getHeight() - 5 ) );
+	gl::setMatricesWindow( getWindowSize() );
+
+	// We'll set the color to an orange color
+	glColor3f( .5f, 0.5f, 0.25f );
+	
+	// now tell OpenGL we've got a series of points it should draw lines between
+	glBegin( GL_LINE_STRIP );
+	// iterate across our list of points, and pass each one to OpenGL
+	for( list<Vec2f>::iterator pointIter = mPoints.begin(); pointIter != mPoints.end(); ++pointIter ) {
+		glVertex2f( *pointIter );
+	}
+	// tell OpenGL to actually draw the lines now
+	glEnd();
 
 }
 
