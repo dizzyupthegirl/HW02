@@ -52,13 +52,13 @@ class HW02App : public AppBasic {
 
 	
 
-	void HW02App::prepareSettings(Settings* settings){
+void HW02App::prepareSettings(Settings* settings){
 	(*settings).setWindowSize(kAppWidth,kAppHeight);
 	(*settings).setResizable(false);
 
 	}
 
-	void HW02App::setup() {
+void HW02App::setup() {
 	circList = new Lists;
     circList->circ_sentinel = new Circle;
     circList->circ_sentinel->next = circList->circ_sentinel;

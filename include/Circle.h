@@ -3,7 +3,9 @@
 #include "cinder/gl/Texture.h"
 
 
-
+/*
+A class that defines the basic qualities of the circle
+*/
 class Circle {
 public:
     
