@@ -11,6 +11,14 @@
 /*
 Samantha Wolf
 Hw02
+Citations: 
+I looked at the sample apps a lot, including the text apps and the basic app.
+I also used as references a few of my peers including: 
+Nick Collins, Brandon Sonoda, and Lucy(Uploaded to Prof. Brinkman's github)
+Also, I referred to Professor Brinkman's code as examples a few times.
+		
+
+
 A. Met by the circle linked list.
 B. Met by the keyDown option
 C.Met by the mouseDown option, that when you click inside a circle, it move to the back.
@@ -50,14 +58,19 @@ class HW02App : public AppBasic {
 		
 };
 
-	
-
+/*
+Sets up the correct settings for the window
+*/
 void HW02App::prepareSettings(Settings* settings){
 	(*settings).setWindowSize(kAppWidth,kAppHeight);
 	(*settings).setResizable(false);
 
 	}
 
+/*
+Creates the linked list and assigns variables their values.
+Also creates the text that appears when toggling help
+*/
 void HW02App::setup() {
 	circList = new Lists;
     circList->circ_sentinel = new Circle;
@@ -100,6 +113,9 @@ void HW02App::setup() {
 	
 }
 
+/*
+Handles an event in case a key is pushed. Only deals with the shift button, h, and ?
+*/
 void HW02App::keyDown(cinder::app::KeyEvent event )
 	{
 	if(event.isShiftDown())
@@ -109,6 +125,9 @@ void HW02App::keyDown(cinder::app::KeyEvent event )
 
 	}
 
+/*
+Makes it possible to draw on the screen!
+*/
 void HW02App::mouseDrag( MouseEvent event )
 {
 	// add wherever the user drags to the end of our list of points
@@ -117,6 +136,10 @@ void HW02App::mouseDrag( MouseEvent event )
 
 }
 
+/*
+Handles the event of a click on the screen. 
+It reverses the list, and if it's on a circle, will move it behind the two surrounding it
+*/
 void HW02App::mouseDown( MouseEvent event )
 {
 	if(event.isRightDown())
@@ -136,16 +159,22 @@ void HW02App::mouseDown( MouseEvent event )
 
 }
 
+/*
+Updates screen by clearing it. Had time allowed, would have used this section for motion
+*/
 void HW02App::update()
 	
 {
-	
+	gl::clear( Color( 0,0,0 ) ); 
 	
 }
 
+/*
+Draws everything on the screen
+*/
 void HW02App::draw()
 {
-	gl::clear( Color( 0,0,0 ) ); 
+	
 	
 	if(help) {
 		glClearColor( 0.1f, 0.1f, 0.1f, 1.0f );
@@ -177,7 +206,6 @@ void HW02App::draw()
 	glEnd();
 	}
 }
-
 
 
 CINDER_APP_BASIC( HW02App, RendererGl )
