@@ -12,14 +12,18 @@
 Samantha Wolf
 Hw02
 A. Met by the circle linked list.
+B. Met by the keyDown option
 C.Met by the mouseDown option, that when you click inside a circle, it move to the back.
-E.Met by reverse funstion
-
+E.Met by reverse function
+J. Met by the mouseDrag (Make's it possible to "connect the dots")
 */
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
+
+#include <list>
+using std::list;
 
 class HW02App : public AppBasic {
   public:
@@ -35,13 +39,14 @@ class HW02App : public AppBasic {
 
 	
 	private:
+	static const bool PREMULT = false;
 	static const int kAppWidth = 800;
 	static const int kAppHeight = 600;
 	static const int textureSize = 1024;
-	static const bool PREMULT = false;
 	int cnt;
 	list<Vec2f>		mPoints;
 	bool help;
+	gl::Texture	mTexture;
 		
 };
 
@@ -72,14 +77,38 @@ class HW02App : public AppBasic {
 	}
 	next=circList->insertAfter(next, 700, 250);
 
-	cnt=0;
+	help=true;
+	#if defined( CINDER_COCOA_TOUCH )
+	std::string normalFont( "Arial" );
+	std::string differentFont( "AmericanTypewriter" );
+	#else
+	std::string normalFont( "Arial" );
+	std::string differentFont( "Papyrus" );
+	#endif
+	TextLayout layout;
+	layout.clear( ColorA( 0.2f, 0.2f, 0.2f, 0.2f ) );
+	layout.setFont( Font( normalFont, 22 ) );
+	layout.setColor( Color( 0.0f, 1.0f, 0.5f ) );
+	layout.addCenteredLine( "Welcome to Connect the Dots!" );
+	layout.addCenteredLine( "Right click or hit shift to reverse list" );
+	layout.addCenteredLine( "Drag mouse to connect dots" );
+	layout.addCenteredLine( "Click in any circle to move it back" );
+	layout.setFont( Font( differentFont, 24 ) );
+	layout.addCenteredLine( "Hit ? or h to toggle this screen" );
+	Surface8u rendered = layout.render( true, PREMULT );
+	mTexture = gl::Texture( rendered );
+	
 }
+
 void HW02App::keyDown(cinder::app::KeyEvent event )
 	{
 	if(event.isShiftDown())
 	circList->reverse();
+	if(event.getChar()=='h' || event.getChar()=='/')
+		help=!help;
 
 	}
+
 void HW02App::mouseDrag( MouseEvent event )
 {
 	// add wherever the user drags to the end of our list of points
@@ -107,18 +136,29 @@ void HW02App::mouseDown( MouseEvent event )
 
 }
 
-
 void HW02App::update()
 	
 {
 	
 	
 }
+
 void HW02App::draw()
 {
+	gl::clear( Color( 0,0,0 ) ); 
 	
-	
-	
+	if(help) {
+		glClearColor( 0.1f, 0.1f, 0.1f, 1.0f );
+	glClear( GL_COLOR_BUFFER_BIT );
+	gl::setMatricesWindow( getWindowSize() );
+
+	gl::enableAlphaBlending( PREMULT );
+
+	gl::color( Color::white() );
+	gl::draw( mTexture, Vec2f( 240, 200 ) );
+	}
+	else{
+
     Circle* current = circList->circ_sentinel->next;
 	
     while(current!= circList->circ_sentinel){
@@ -135,7 +175,7 @@ void HW02App::draw()
 		glVertex2f( *pointIter );
 	}
 	glEnd();
-
+	}
 }
 
 
