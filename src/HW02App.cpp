@@ -8,7 +8,14 @@
 #include "Resources.h"
 
 
+/*
+Samantha Wolf
+Hw02
+A. Met by the circle linked list.
+C.Met by the mouseDown option, that when you click inside a circle, it move to the back.
+E.Met by reverse funstion
 
+*/
 
 using namespace ci;
 using namespace ci::app;
@@ -20,6 +27,7 @@ class HW02App : public AppBasic {
 	void setup();
 	void keyDown( KeyEvent event );
 	void mouseDown( MouseEvent event );	
+	void mouseDrag(MouseEvent event);
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
@@ -72,6 +80,13 @@ void HW02App::keyDown(cinder::app::KeyEvent event )
 	circList->reverse();
 
 	}
+void HW02App::mouseDrag( MouseEvent event )
+{
+	// add wherever the user drags to the end of our list of points
+	mPoints.push_back( event.getPos() );
+
+
+}
 
 void HW02App::mouseDown( MouseEvent event )
 {
@@ -80,7 +95,7 @@ void HW02App::mouseDown( MouseEvent event )
 	Circle* current = circList->circ_sentinel->next;
 	while(current!= circList->circ_sentinel) {
 	if(circList->isInside(event.getX(), event.getY(),current)) {
-		circList->moveToFront(current);
+		circList->moveToBack(current);
 		current=circList->circ_sentinel;
 	}
 	else {
@@ -111,7 +126,16 @@ void HW02App::draw()
 		gl::drawSolidCircle(Vec2f(current->pos_X, current->pos_Y), current->radius,0);
 		current = current->next;
     }    
+	  
+ 	glColor3f( 1.0f, 1.0f, 1.0f );
 	
+	
+	glBegin( GL_LINE_STRIP );
+	for( list<Vec2f>::iterator pointIter = mPoints.begin(); pointIter != mPoints.end(); ++pointIter ) {
+		glVertex2f( *pointIter );
+	}
+	glEnd();
+
 }
 
 

@@ -14,7 +14,7 @@ Circle* Lists::insertAfter(Circle* previousCirc, int pos_X, int pos_Y){
     return temp;
 
 }
-void Lists::moveToFront(Circle* movee){
+void Lists::moveToBack(Circle* movee){
     movee->previous->next = movee->next;
     movee->next->previous = movee->previous;
     circ_sentinel->next->previous = movee;
