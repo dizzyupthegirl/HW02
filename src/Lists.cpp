@@ -14,22 +14,23 @@ Circle* Lists::insertAfter(Circle* previousCirc, int pos_X, int pos_Y){
     return temp;
 
 }
-
-
-/*Squares* Lists::insertAfter(Squares* previousSqr, int s){
-    Squares* temp = new Squares;
-    temp->next = previousSqr->next;
-    temp->previous = previousSqr;
-    previousSqr->next = temp;
-    temp->next->previous = temp;
-    temp->side = s;
-    temp->color = cinder::Color8u(rand()%256, rand()%256, rand()%256);
-    
-    return temp;
+void Lists::moveToFront(Circle* movee){
+    movee->previous->next = movee->next;
+    movee->next->previous = movee->previous;
+    circ_sentinel->next->previous = movee;
+    movee->next = circ_sentinel->next;
+    circ_sentinel->next = circ_sentinel->next->previous;
+    movee->previous = circ_sentinel;
 }
-*/
 
-void Lists::reverse(){
+bool Lists::isInside(int x, int y, Circle* check) {
+	int deltaX = x-check->pos_X;
+    int deltaY = y-check->pos_Y;
+    int distance = sqrt((double)deltaX*deltaX+deltaY*deltaY);
+    return(distance <= check->radius);
+}
+
+    void Lists::reverse(){
     Circle* cur = circ_sentinel;
     Circle* temp;
     
