@@ -107,16 +107,25 @@ void HW02App::mouseDrag( MouseEvent event )
 
 
 void HW02App::update()
-
-{
 	
-	circList->resize();
+{
+	if(cnt<20) {
+		circList->circ_sentinel->radius=circList->circ_sentinel->radius-2;
+		cnt++;
+	}
+	else {
+		if(cnt==40)
+			cnt=0;
+		else
+			circList->circ_sentinel->radius=circList->circ_sentinel->radius+2;
+		
+	
+	}
 	
 }
 void HW02App::draw()
 {
 	
-	gl::clear(Color(100,0,255));
 	
 	
     Circle* current = circList->circ_sentinel->next;
@@ -134,6 +143,7 @@ void HW02App::draw()
 	for( list<Vec2f>::iterator pointIter = mPoints.begin(); pointIter != mPoints.end(); ++pointIter ) {
 		glVertex2f( *pointIter );
 	}
+	glEnd();
 	
 
 }
