@@ -19,8 +19,7 @@ using namespace std;
 class HW02App : public AppBasic {
   public:
     Lists* circList;
-	gl::Texture	mTextTexture, mSimpleTexture;
-
+	gl::Texture	mTextTexture, mSimpleTexture, circles;
 	void setup();
 	void mouseDown( MouseEvent event );	
 	void mouseDrag(MouseEvent event);
@@ -57,14 +56,14 @@ void HW02App::setup()
     circList->circ_sentinel = new Circle;
     circList->circ_sentinel->next = circList->circ_sentinel;
     circList->circ_sentinel->previous = circList->circ_sentinel;
-	circList->circ_sentinel->radius = kAppWidth/6;
+	circList->circ_sentinel->radius = 50;
 	circList->circ_sentinel->color=Color(255,0,0);
-	circList->circ_sentinel->pos_X=200;
 	circList->circ_sentinel->pos_X=400;
+	circList->circ_sentinel->pos_X=200;
     Circle* next;
 	next = circList->insertAfter(circList->circ_sentinel, kAppWidth/8, kAppHeight/4);
-	for(int i=0; i<6; i++) {
-	 next= circList->insertAfter(next, i*kAppWidth/2, kAppHeight/2);
+	for(int i=1; i<20; i++) {
+	 next= circList->insertAfter(next, (circList->circ_sentinel->pos_X)+20*i ,  (circList->circ_sentinel->pos_X)+20*i);
 	}
 	
 
@@ -85,7 +84,7 @@ void HW02App::mouseDrag( MouseEvent event )
 	mPoints.push_back( event.getPos() );
 }
 
-void HW02App::keyPress( KeyEvent event )
+/*void HW02App::keyPress( KeyEvent event )
 {
 	char ch =( event.getChar() == 0 ) ? ' ' : event.getChar();
 
@@ -101,7 +100,7 @@ void HW02App::keyPress( KeyEvent event )
 		console() << "Height: " << sz.y << endl;
 		mTextTexture = gl::Texture( tbox.render() );
 	}
-}
+}*/
 
 
 
@@ -135,7 +134,9 @@ void drawCircle(int x, int y, int r, uint8_t* pixelData, int red, int green, int
 void display(Lists* circList, uint8_t* data){
     Circle* current = circList->circ_sentinel->next;
     while(current!= circList->circ_sentinel){
+		gl::color(current->color);
 		gl::drawSolidCircle(Vec2f(current->pos_X, current->pos_Y), current->radius,0);
+		current = current->next;
     }    
 }
 
@@ -161,22 +162,20 @@ void HW02App::update()
 void HW02App::draw()
 {
 
-	gl::draw(*my_Surface);
+	//gl::draw(*my_Surface);
 	gl::draw( mSimpleTexture, Vec2f( 10, getWindowHeight() - mSimpleTexture.getHeight() - 5 ) );
 	gl::setMatricesWindow( getWindowSize() );
-	Circle* current = circList->circ_sentinel->next;
-    while(current!= circList->circ_sentinel){
-		gl::drawSolidCircle(Vec2f(current->pos_X, current->pos_Y), current->radius,0);
-    }  
-	gl::drawSolidCircle(Vec2f(20.0f, 300.0f), 50.0f);
+	
+ 
+	/*gl::drawSolidCircle(Vec2f(20.0f, 300.0f), 50.0f);
 	gl::drawSolidCircle(Vec2f(30.0f, 300.0f), 60.0f);
 	gl::drawSolidCircle(Vec2f(400.0f, 300.0f), 70.0f);
 	gl::drawSolidCircle(Vec2f(500.0f, 300.0f), 80.0f);
-
+	*/
 	if( mTextTexture )
 		gl::draw( mTextTexture );
 	
-
+	
 	// We'll set the color to an orange color
 	glColor3f( .5f, 0.5f, 0.25f );
 	
