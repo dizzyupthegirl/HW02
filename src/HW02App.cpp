@@ -19,7 +19,7 @@ using namespace std;
 class HW02App : public AppBasic {
   public:
     Lists* circList;
-	gl::Texture	mTexture, mSimpleTexture;
+	gl::Texture	mTextTexture, mSimpleTexture;
 
 	void setup();
 	void mouseDown( MouseEvent event );	
@@ -27,7 +27,7 @@ class HW02App : public AppBasic {
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
-
+	void HW02App::keyPress( KeyEvent event );
 
 	
 	private:
@@ -40,6 +40,7 @@ class HW02App : public AppBasic {
 	static const bool PREMULT = false;
 	int clicks, iterations;
 	list<Vec2f>		mPoints;
+	bool help=false;;
 
 	void HW02App::prepareSettings(Settings* settings){
 	(*settings).setWindowSize(kAppWidth,kAppHeight);
@@ -82,6 +83,23 @@ void HW02App::mouseDrag( MouseEvent event )
 	mPoints.push_back( event.getPos() );
 }
 
+void HW02App::keyPress( KeyEvent event )
+{
+	char ch =( event.getChar() == 0 ) ? ' ' : event.getChar();
+
+	if(ch=='h') {
+	//help!=help;
+	//if(help==true) {
+		Vec2f mSize=Vec2f( 100, 100 );
+		string txt = "Here is some text that is larger than can fit naturally inside of 100 pixels.\nAnd here is another line after a hard break.";
+		TextBox tbox = TextBox().alignment( TextBox::CENTER ).font(Font( "Times New Roman", 32 )).size( Vec2i( mSize.x, TextBox::GROW ) ).text( txt );
+		tbox.setColor( Color( 1.0f, 0.65f, 0.35f ) );
+		tbox.setBackgroundColor( ColorA( 0.5, 0, 0, 1 ) );
+		Vec2i sz = tbox.measure();
+		console() << "Height: " << sz.y << endl;
+		mTextTexture = gl::Texture( tbox.render() );
+	}
+}
 
 
 
@@ -143,9 +161,13 @@ void HW02App::update()
 
 void HW02App::draw()
 {
+
 	gl::draw(*my_Surface);
 	gl::draw( mSimpleTexture, Vec2f( 10, getWindowHeight() - mSimpleTexture.getHeight() - 5 ) );
 	gl::setMatricesWindow( getWindowSize() );
+	gl::drawSolidCircle(Vec2f(20.0f, 300.0f), 40.0f);
+	if( mTextTexture )
+		gl::draw( mTextTexture );
 
 	// We'll set the color to an orange color
 	glColor3f( .5f, 0.5f, 0.25f );
