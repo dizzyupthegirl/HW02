@@ -30,6 +30,15 @@ bool Lists::isInside(int x, int y, Circle* check) {
     return(distance <= check->radius);
 }
 
+void Lists::resize(){
+    Circle* current = circ_sentinel->next;
+    double factor = 1;
+    while(current!=circ_sentinel){
+        current->radius = (int)(factor*circ_sentinel->radius);
+        factor*=.75;
+        current = current->next;
+    }  
+}
     void Lists::reverse(){
     Circle* cur = circ_sentinel;
     Circle* temp;
