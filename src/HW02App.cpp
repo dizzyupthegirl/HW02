@@ -7,6 +7,7 @@
 #include "cinder/ImageIo.h"
 #include "Resources.h"
 
+/*Reviewed by Brandon Sonoda.  My comments will start with "BS:"  */
 
 /*
 Samantha Wolf
@@ -51,7 +52,9 @@ class HW02App : public AppBasic {
 	static const int kAppWidth = 800;
 	static const int kAppHeight = 600;
 	static const int textureSize = 1024;
-	int cnt;
+    
+	//int cnt; 
+    //BS: Unused variable... also an interesting name... could be misconstrued quite badly.
 	list<Vec2f>		mPoints;
 	bool help;
 	gl::Texture	mTexture;
@@ -73,6 +76,7 @@ Also creates the text that appears when toggling help
 */
 void HW02App::setup() {
 	circList = new Lists;
+    
     circList->circ_sentinel = new Circle;
     circList->circ_sentinel->next = circList->circ_sentinel;
     circList->circ_sentinel->previous = circList->circ_sentinel;
@@ -82,12 +86,25 @@ void HW02App::setup() {
     Circle* next;
 	next=circList->insertAfter(circList->circ_sentinel, 400, 50);
 	next=circList->insertAfter(next,100  , 250);
+    
+    /*
 	for(int i=1; i<7; i++) {
 	 next= circList->insertAfter(next, (circList->circ_sentinel->pos_X) ,  (circList->circ_sentinel->pos_X)+50*i);
 	}
 	for(int i=1; i<7; i++) {
 	 next= circList->insertAfter(next, (circList->circ_sentinel->pos_X)+400 ,  (circList->circ_sentinel->pos_X)+50*i);
 	}
+     */
+    
+    /*BS Since the two previous loops had the same variable you can combine them...
+     It might mess with the initial order... but that will change as the program is
+     run anyway.*/
+    for(int i=1; i<7; i++) {
+        next= circList->insertAfter(next, (circList->circ_sentinel->pos_X) ,  (circList->circ_sentinel->pos_X)+50*i);
+        next= circList->insertAfter(next, (circList->circ_sentinel->pos_X)+400 ,  (circList->circ_sentinel->pos_X)+50*i);
+	}
+
+    
 	next=circList->insertAfter(next, 700, 250);
 
 	help=true;
@@ -118,8 +135,9 @@ Handles an event in case a key is pushed. Only deals with the shift button, h, a
 */
 void HW02App::keyDown(cinder::app::KeyEvent event )
 	{
-	if(event.isShiftDown())
-	circList->reverse();
+//BS: didn't work for me... might be my comp... shrugs.
+        if(event.isShiftDown())   
+            circList->reverse();
 	if(event.getChar()=='h' || event.getChar()=='/')
 		help=!help;
 

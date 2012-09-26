@@ -15,9 +15,7 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		00BAE65A0E7ED9C10018A608 /* HW02App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00BAE6590E7ED9C10018A608 /* HW02App.cpp */; };
 		00CCAF15116A9FEE008396D5 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 00CCAF14116A9FEE008396D5 /* CinderApp.icns */; };
-		4CD7FD5F161293F10093D28C /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD7FD5B161293F10093D28C /* Circle.cpp */; };
 		4CD7FD61161293F10093D28C /* Lists.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD7FD5D161293F10093D28C /* Lists.cpp */; };
-		4CD7FD62161293F10093D28C /* Squares.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD7FD5E161293F10093D28C /* Squares.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
 		53E3CDFC0E86099300238D2B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E3CDFB0E86099300238D2B /* Carbon.framework */; };
@@ -38,13 +36,10 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* HW02_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HW02_Prefix.pch; sourceTree = "<group>"; };
-		4CD7FD5B161293F10093D28C /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Circle.cpp; path = ../src/Circle.cpp; sourceTree = "<group>"; };
 		4CD7FD5D161293F10093D28C /* Lists.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Lists.cpp; path = ../src/Lists.cpp; sourceTree = "<group>"; };
-		4CD7FD5E161293F10093D28C /* Squares.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Squares.cpp; path = ../src/Squares.cpp; sourceTree = "<group>"; };
 		4CD7FD64161294030093D28C /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = ../include/Circle.h; sourceTree = "<group>"; };
 		4CD7FD65161294030093D28C /* Lists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lists.h; path = ../include/Lists.h; sourceTree = "<group>"; };
 		4CD7FD66161294030093D28C /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
-		4CD7FD67161294030093D28C /* Squares.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Squares.h; path = ../include/Squares.h; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		5323E6B50EAFCA7E003A9687 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		53E3CDFB0E86099300238D2B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -76,9 +71,7 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				4CD7FD5B161293F10093D28C /* Circle.cpp */,
 				4CD7FD5D161293F10093D28C /* Lists.cpp */,
-				4CD7FD5E161293F10093D28C /* Squares.cpp */,
 				00BAE6590E7ED9C10018A608 /* HW02App.cpp */,
 			);
 			name = Source;
@@ -137,7 +130,6 @@
 				4CD7FD64161294030093D28C /* Circle.h */,
 				4CD7FD65161294030093D28C /* Lists.h */,
 				4CD7FD66161294030093D28C /* Resources.h */,
-				4CD7FD67161294030093D28C /* Squares.h */,
 				32CA4F630368D1EE00C91783 /* HW02_Prefix.pch */,
 			);
 			name = Headers;
@@ -220,9 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00BAE65A0E7ED9C10018A608 /* HW02App.cpp in Sources */,
-				4CD7FD5F161293F10093D28C /* Circle.cpp in Sources */,
 				4CD7FD61161293F10093D28C /* Lists.cpp in Sources */,
-				4CD7FD62161293F10093D28C /* Squares.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
