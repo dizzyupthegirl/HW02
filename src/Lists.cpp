@@ -36,6 +36,7 @@ void Lists::moveToBack(Circle* movee){
 /*
 Uses the distance formula to see if a specified point clicked is within a circle
 */
+/*BS: I would put this in the circle class so you don't have to pass the circle pointer*/
 bool Lists::isInside(int x, int y, Circle* check) {
 	int X = x-check->pos_X;
     int Y = y-check->pos_Y;
