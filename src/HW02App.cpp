@@ -23,7 +23,7 @@ A. Met by the circle linked list.
 B. Met by the keyDown option
 C.Met by the mouseDown option, that when you click inside a circle, it move to the back.
 E.Met by reverse function
-J. Met by the mouseDrag (Make's it possible to "connect the dots")
+J. Met by the mouseDrag (Makes it possible to "connect the dots")
 */
 
 using namespace ci;
@@ -76,19 +76,24 @@ void HW02App::setup() {
     circList->circ_sentinel = new Circle;
     circList->circ_sentinel->next = circList->circ_sentinel;
     circList->circ_sentinel->previous = circList->circ_sentinel;
+	
+	
 	circList->circ_sentinel->radius = 30;
 	circList->circ_sentinel->pos_X=200;
 	circList->circ_sentinel->pos_Y=0;
+	
     Circle* next;
-	next=circList->insertAfter(circList->circ_sentinel, 400, 50);
-	next=circList->insertAfter(next,100  , 250);
+	
+	next=circList->insertAfter(circList->circ_sentinel, 400, 50,60);
+	next=circList->insertAfter(next,100 , 250 ,30);
 	for(int i=1; i<7; i++) {
-	 next= circList->insertAfter(next, (circList->circ_sentinel->pos_X) ,  (circList->circ_sentinel->pos_X)+50*i);
+	 next= circList->insertAfter(next, (circList->circ_sentinel->pos_X) ,  (circList->circ_sentinel->pos_X)+50*i, 30);
 	}
 	for(int i=1; i<7; i++) {
-	 next= circList->insertAfter(next, (circList->circ_sentinel->pos_X)+400 ,  (circList->circ_sentinel->pos_X)+50*i);
+	 next= circList->insertAfter(next, (circList->circ_sentinel->pos_X)+400 ,  (circList->circ_sentinel->pos_X)+50*i, 30 );
 	}
-	next=circList->insertAfter(next, 700, 250);
+	next=circList->insertAfter(next, 700, 250, 30);
+	
 
 	help=true;
 	#if defined( CINDER_COCOA_TOUCH )
@@ -123,6 +128,9 @@ void HW02App::keyDown(cinder::app::KeyEvent event )
 	if(event.getChar()=='h' || event.getChar()=='/')
 		help=!help;
 
+	//NC: Kind of unneccesary, but I decided that clearing the screen could be fun.
+	if(event.getChar()==' ')
+		mPoints.clear();
 	}
 
 /*
@@ -131,8 +139,10 @@ Makes it possible to draw on the screen!
 void HW02App::mouseDrag( MouseEvent event )
 {
 	// add wherever the user drags to the end of our list of points
-	mPoints.push_back( event.getPos() );
-
+	// NC: conditional added for less confusing interface. Line is only
+	// drawn when the left button is down
+	if(event.isLeftDown())
+	    mPoints.push_back( event.getPos() );
 
 }
 
@@ -143,16 +153,19 @@ It reverses the list, and if it's on a circle, will move it behind the two surro
 void HW02App::mouseDown( MouseEvent event )
 {
 	if(event.isRightDown())
-	circList->reverse();
+	    circList->reverse();
+
+	// NC TODO: I wasn't able to figure it out for myself, but it would be nice
+	// for one circle to still be pushed back if multiple circles are clicked
 	Circle* current = circList->circ_sentinel->next;
 	while(current!= circList->circ_sentinel) {
 	if(circList->isInside(event.getX(), event.getY(),current)) {
 		circList->moveToBack(current);
 		current=circList->circ_sentinel;
 	}
-	else {
+	else 
 		current = current->next;
-	}
+	
 	}
 	
 	
